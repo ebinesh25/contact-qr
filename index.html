@@ -62,19 +62,19 @@
         <aside class="qr-panel">
           <div class="qr-topline"><div><h2 id="qrHeading">WhatsApp QR</h2></div><span class="qr-live"><i></i> LIVE QR</span></div>
           <p class="qr-hint">QR for <strong id="qrContactName">your contact</strong></p>
+          
+          <div class="qr-frame"><div id="qrCode" aria-label="Generated contact QR code"></div><div id="qrEmpty" class="qr-empty" hidden>QR code unavailable</div></div>
           <div class="channel-switch" role="tablist" aria-label="QR destination">
             <button class="channel-option active" data-channel="whatsapp" role="tab" aria-selected="true"><span class="wa-icon">◔</span> WhatsApp</button>
             <button class="channel-option" data-channel="email" role="tab" aria-selected="false"><span class="mail-icon">✉</span> Email</button>
           </div>
-          <div class="qr-frame"><div id="qrCode" aria-label="Generated contact QR code"></div><div id="qrEmpty" class="qr-empty" hidden>QR code unavailable</div></div>
-          <div class="qr-caption"><span class="qr-caption-mark">⌗</span><span>SCAN TO <strong id="qrCaption">WHATSAPP</strong></span></div>
+          <div class="qr-caption" style="display: none;"><span class="qr-caption-mark">⌗</span><span>SCAN TO <strong id="qrCaption">WHATSAPP</strong></span></div>
           <div class="detail-card" style="display: none;">
             <div class="detail-label" id="detailLabel">WHATSAPP NUMBER</div>
             <div class="detail-value-row"><strong id="detailValue">—</strong><button id="copyBtn" class="copy-icon" aria-label="Copy contact link" title="Copy link">Copy</button></div>
             <div class="detail-sub" id="detailSub">Used by this QR to open a direct chat</div>
           </div>
-          <p class="qr-footnote" id="qrInstruction">Scan this code to start a WhatsApp chat.</p>
-          <div class="qr-actions"><button id="downloadBtn" class="download-btn"><span>↓</span> Download PNG</button><button id="shareBtn" class="share-btn" aria-label="Share link" title="Share link">↗</button></div>
+          <p class="qr-footnote" id="qrInstruction" style="display: none;">Scan this code to start a WhatsApp chat.</p>
         </aside>
       </section>
 
@@ -94,10 +94,13 @@
       <div class="dialog-actions"><button type="button" class="cancel-btn" id="cancelDialog">Cancel</button><button class="save-btn" type="submit">Save contact <span>→</span></button></div>
     </form>
   </dialog>
+  <div class="qr-actions"><button id="downloadBtn" class="download-btn"><span>↓</span> Download PNG</button><button id="shareBtn" class="share-btn" aria-label="Share link" title="Share link">↗</button></div>
+
   <dialog id="settingsDialog">
     <div class="dialog-top"><div><div class="eyebrow">PREFERENCES</div><h2>Settings</h2></div><button type="button" class="close-btn" data-close-settings aria-label="Close">×</button></div>
     <div class="settings-content"><div class="setting-item"><strong>Install Contact QR</strong><p>On iPhone, tap Share in Safari then “Add to Home Screen”. On Android, use the install button in your browser.</p></div><div class="setting-item"><strong>Local data</strong><p>Your contacts are stored in this browser only. Clearing site data removes them.</p><button id="resetBtn" class="reset-btn">Reset all contacts</button></div></div>
   </dialog>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="vendor/qrcode.min.js"></script>
   <script src="app.js"></script>
