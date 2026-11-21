@@ -2,17 +2,17 @@
   const KEY = 'contact-qr-v1';
   const starter = [
     { id: makeId(), name: 'Primary contact', phone: '+91 99528 73209', email: 'selvaero3@gmail.com' },
-    { id: makeId(), name: 'Alternate contact', phone: '+1 202 555 0102', email: 'alternate@example.com' }
+    { id: makeId(), name: 'Secondary contact', phone: '+1 202 555 0102', email: 'alternate@example.com' }
   ];
   let state;
   try { state = JSON.parse(localStorage.getItem(KEY)); } catch (_) { state = null; }
   if (!state || !Array.isArray(state.contacts) || state.contacts.length === 0) {
-    state = { contacts: starter, selected: starter[0].id, defaultId: starter[0].id, channel: 'whatsapp', schemaVersion: 4 };
+    state = { contacts: starter, selected: starter[0].id, defaultId: starter[0].id, channel: 'whatsapp', schemaVersion: 5 };
     persist();
   }
   if (!state.contacts.some(c => c.id === state.selected)) state.selected = state.contacts[0]?.id;
   if (!['whatsapp', 'email'].includes(state.channel)) state.channel = 'whatsapp';
-  if (state.schemaVersion !== 4) {
+  if (state.schemaVersion !== 5) {
     if (!state.schemaVersion) {
       const primary = state.contacts.find(c => digits(c.phone) === '919952873209')
         || state.contacts.find(c => digits(c.phone) === '12025550101');
@@ -23,8 +23,8 @@
         state.selected = primary.id;
       }
     }
-    if (state.schemaVersion === 3) state.contacts.forEach(c => { if (c.name === 'Secondary contact') c.name = 'Alternate contact'; });
-    state.schemaVersion = 4;
+    state.contacts.forEach(c => { if (c.name === 'Alternate contact') c.name = 'Secondary contact'; });
+    state.schemaVersion = 5;
     persist();
   }
 
@@ -49,12 +49,18 @@
     if (c && state.channel === 'email' && !c.email) { state.channel = 'whatsapp'; persist(); }
     list.innerHTML = '';
     state.contacts.forEach(contact => {
+      const row = document.createElement('div');
+      row.className = 'contact-row';
       const button = document.createElement('button');
       button.className = `contact-chip${contact.id === c?.id ? ' active' : ''}`;
       button.setAttribute('aria-pressed', String(contact.id === c?.id));
       button.innerHTML = `<span class="avatar">${escapeHTML(initials(contact.name))}</span><span class="chip-copy"><span class="chip-name">${escapeHTML(contact.name)}</span><span class="chip-phone">${escapeHTML(contact.phone)}</span></span>${contact.id === state.defaultId ? '<span class="default-star" title="Default contact">★</span>' : ''}`;
       button.addEventListener('click', () => { state.selected = contact.id; persist(); render(); });
-      list.append(button);
+      const edit = document.createElement('button');
+      edit.type = 'button'; edit.className = 'contact-row-edit'; edit.textContent = 'Edit';
+      edit.setAttribute('aria-label', `Edit ${contact.name}`);
+      edit.addEventListener('click', () => openEditor(contact));
+      row.append(button, edit); list.append(row);
     });
     document.querySelectorAll('.channel-option').forEach(button => {
       const active = button.dataset.channel === state.channel;
@@ -71,7 +77,6 @@
     $('qrCaption').textContent = emailMode ? 'EMAIL' : 'WHATSAPP';
     $('qrInstruction').textContent = emailMode ? `Scan this code to compose an email to ${c.name}.` : `Scan this code to start a WhatsApp chat with ${c.name}.`;
     const link = destination(c);
-    $('editContactBtn').disabled = false;
     $('setDefaultBtn').textContent = c.id === state.defaultId ? '★ Default contact' : '☆ Set as default';
     $('setDefaultBtn').disabled = c.id === state.defaultId;
     $('deleteContactBtn').disabled = state.contacts.length === 1;
@@ -93,7 +98,6 @@
     $('formError').textContent = ''; dialog.showModal(); $('nameInput').focus();
   }
   $('addContactBtn').addEventListener('click', () => openEditor());
-  $('editContactBtn').addEventListener('click', () => openEditor(current()));
   $('closeDialog').addEventListener('click', () => dialog.close()); $('cancelDialog').addEventListener('click', () => dialog.close());
   form.addEventListener('submit', event => {
     event.preventDefault();
@@ -142,7 +146,7 @@
   document.querySelector('[data-close-settings]').addEventListener('click', () => $('settingsDialog').close());
   $('resetBtn').addEventListener('click', () => {
     if (!confirm('Reset all contacts saved on this device?')) return;
-    localStorage.removeItem(KEY); state = { contacts: starter, selected: starter[0].id, defaultId: starter[0].id, channel: 'whatsapp', schemaVersion: 4 }; persist(); render(); $('settingsDialog').close(); toast('Contacts reset to the starter list');
+    localStorage.removeItem(KEY); state = { contacts: starter, selected: starter[0].id, defaultId: starter[0].id, channel: 'whatsapp', schemaVersion: 5 }; persist(); render(); $('settingsDialog').close(); toast('Contacts reset to the starter list');
   });
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); deferredInstall = event; $('installBtn').hidden = false; });
   $('installBtn').addEventListener('click', async () => {
