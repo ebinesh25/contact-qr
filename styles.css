@@ -64,11 +64,20 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #94b9
 .contact-chip{flex:1;min-width:0;max-width:none}
 .contact-row-edit{height:36px;min-width:58px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:#53604f;font:600 11px var(--sans);cursor:pointer}
 .contact-row-edit:hover{border-color:#a2b792;background:#f8faf4}
+.contact-row{padding:0 7px;border:1px solid var(--line);border-radius:11px;background:#fff;transition:border-color .14s ease,background-color .14s ease,box-shadow .14s ease}
+.contact-row.active{border-color:#789d59;background:#f6f9f0;box-shadow:0 0 0 1px #789d59}
+.contact-row .contact-chip,.contact-row .contact-chip:hover{border:0;background:transparent;box-shadow:none;border-radius:7px;padding:4px;min-height:50px}
+.contact-row .contact-chip:focus-visible{outline-offset:-2px}
+.chip-name-row{display:flex;align-items:center;gap:8px;min-width:0}
+.default-badge{display:inline-flex;align-self:flex-start;flex:0 0 auto;background:var(--green);color:#294026;border-radius:999px;padding:3px 6px;margin-top:2px;font:500 8px var(--mono);letter-spacing:.3px}
+.contact-row-edit{width:36px;min-width:36px;height:36px;padding:0;border:0;border-radius:8px;background:transparent;color:#53604f;display:grid;place-items:center}
+.contact-row-edit:hover{border:0;background:#eaf0df}
+.contact-row-edit svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:760px){
   main,.workspace,.contact-list{min-width:0;gap:1rem}
   main{display:flex;flex-direction:column}
   footer{display:none}
-  .app-shell{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  .app-shell{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
   .intro{display:none}
   .qr-panel{grid-row:1;padding:15px 16px 16px;border:0;border-bottom:1px solid #eaebe5}
   .contact-panel>.section-head:first-child{grid-row:3}
@@ -80,18 +89,19 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #94b9
   .qr-panel .qr-topline,.qr-panel .qr-hint{display:none}
   .qr-hint{margin:8px 0 10px}
   .qr-caption{margin-top:8px}
-  .qr-actions{position:fixed;inset:auto 0 0;width:100%;height:auto;z-index:20;justify-content:center;margin:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom));background:#f7f8f3;border-top:1px solid #e3e6dc;box-shadow:0 -8px 24px #1c302510}
+  .qr-actions{position:static;width:100%;height:auto;z-index:auto;justify-content:center;margin:12px 0 0;padding:0;background:transparent;border:0;box-shadow:none}
   .download-btn{flex:1;max-width:320px;height:54px;padding:10px 14px;font-size:12px}
   .download-btn span{font-size:16px}
   .share-btn{width:54px;height:54px;flex:0 0 54px}
-  .contact-row{width:100%;height:52px;gap:8px}
-  .contact-row .contact-chip{width:auto;height:52px;flex:1;min-width:0}
-  .contact-row-edit{height:36px;min-width:56px}
+  .contact-row{width:100%;height:64px;gap:8px}
+  .contact-row .contact-chip{width:auto;height:62px;flex:1;min-width:0}
+  .contact-row-edit{height:36px;min-width:36px}
   .qr-footnote{margin-top:8px}
   footer{flex-wrap:nowrap;white-space:nowrap;letter-spacing:.2px;font-size:7px}
   footer span{white-space:nowrap}
-  .contact-list{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:52px;gap:1rem;overflow-x:hidden;overflow-y:auto;max-height:120px;padding:0 20px;overscroll-behavior:contain;scrollbar-width:thin}
-  .contact-chip{width:100%;min-width:0;max-width:none;min-height:52px;flex:initial}
+  .contact-list{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:64px;gap:1rem;overflow-x:hidden;overflow-y:auto;max-height:144px;padding:0 20px;overscroll-behavior:contain;scrollbar-width:thin}
+  .contact-chip{width:100%;min-width:0;max-width:none;min-height:62px;flex:initial}
+  .chip-copy{gap:1px}
   .contact-select-head{gap:8px}
   .edit-shortcut,.new-contact-btn{height:32px;padding-inline:10px}
 }

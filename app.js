@@ -50,15 +50,17 @@
     list.innerHTML = '';
     state.contacts.forEach(contact => {
       const row = document.createElement('div');
-      row.className = 'contact-row';
+      row.className = `contact-row${contact.id === c?.id ? ' active' : ''}`;
       const button = document.createElement('button');
-      button.className = `contact-chip${contact.id === c?.id ? ' active' : ''}`;
+      button.className = 'contact-chip';
       button.setAttribute('aria-pressed', String(contact.id === c?.id));
-      button.innerHTML = `<span class="avatar">${escapeHTML(initials(contact.name))}</span><span class="chip-copy"><span class="chip-name">${escapeHTML(contact.name)}</span><span class="chip-phone">${escapeHTML(contact.phone)}</span></span>${contact.id === state.defaultId ? '<span class="default-star" title="Default contact">★</span>' : ''}`;
+      button.innerHTML = `<span class="avatar">${escapeHTML(initials(contact.name))}</span><span class="chip-copy"><span class="chip-name">${escapeHTML(contact.name)}</span><span class="chip-phone">${escapeHTML(contact.phone)}</span>${contact.id === state.defaultId ? '<span class="default-badge">★ DEFAULT CONTACT</span>' : ''}</span>`;
       button.addEventListener('click', () => { state.selected = contact.id; persist(); render(); });
       const edit = document.createElement('button');
-      edit.type = 'button'; edit.className = 'contact-row-edit'; edit.textContent = 'Edit';
+      edit.type = 'button'; edit.className = 'contact-row-edit';
       edit.setAttribute('aria-label', `Edit ${contact.name}`);
+      edit.title = `Edit ${contact.name}`;
+      edit.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>';
       edit.addEventListener('click', () => openEditor(contact));
       row.append(button, edit); list.append(row);
     });

@@ -14,3 +14,7 @@ python3 -m http.server 8000
 Then open `http://localhost:8000`. The QR generator library is included locally in `vendor/`, so QR generation works offline once the app shell has been cached.
 
 The default primary contact is prefilled with the provided WhatsApp number and email address. The secondary contact is a sample entry; replace its details before sharing. Data is saved per browser/device and does not sync between devices.
+
+## Cloudflare Workers Builds
+
+This repository uses an assets-only Wrangler configuration. Set the production branch to `main`, leave the build command empty, use `npx wrangler deploy` as the deploy command, and set the root directory to the folder containing `wrangler.jsonc` and `index.html`.
