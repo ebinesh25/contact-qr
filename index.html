@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f5f0">
+  <meta name="description" content="Create WhatsApp and email contact QR codes, switch recipients instantly, and download shareable PNGs. Contacts stay saved on your device.">
+  <link rel="canonical" href="https://contact-qr.ebinesh.in/">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Contact QR">
+  <meta property="og:url" content="https://contact-qr.ebinesh.in/">
+  <meta property="og:title" content="WhatsApp &amp; Email Contact QR Code Generator | Contact QR">
+  <meta property="og:description" content="Create a QR code for each contact. Switch between WhatsApp and email, then share or download instantly.">
+  <meta property="og:image" content="https://contact-qr.ebinesh.in/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Contact QR — share WhatsApp and email contact codes">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WhatsApp &amp; Email Contact QR Code Generator | Contact QR">
+  <meta name="twitter:description" content="Create a QR code for each contact. Switch between WhatsApp and email, then share or download instantly.">
+  <meta name="twitter:image" content="https://contact-qr.ebinesh.in/og-image.png">
+  <title>WhatsApp &amp; Email Contact QR Code Generator | Contact QR</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Contact QR",
+    "url": "https://contact-qr.ebinesh.in/",
+    "description": "Create WhatsApp and email contact QR codes, switch recipients instantly, and download shareable PNGs.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript and a modern web browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Contact QR home"><span class="brand-mark">⌗</span><span>contact<span class="brand-light">qr</span></span></a>
+      <div class="top-actions"><span class="privacy"><i></i> Saved on this device</span><button id="installBtn" class="install-btn" hidden>＋ Install app</button><button id="settingsBtn" class="icon-btn" aria-label="Settings" title="Settings">⚙</button></div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow"><span class="live-dot"></span> CONTACT QR <span class="eyebrow-divider">/</span> READY TO SHARE</div>
+        <h1>Contact QR generator.</h1>
+        <p>Create WhatsApp or email QR codes for each contact. Switch recipients instantly.</p>
+      </section>
+
+      <section class="workspace" aria-label="Contact QR generator">
+        <div class="contact-panel">
+          <div class="section-head contact-select-head"><div><h2>Select contact</h2></div><div class="contact-header-actions"><button class="edit-shortcut" id="editContactBtn">Edit</button><button class="new-contact-btn" id="addContactBtn"><span>＋</span> New</button></div></div>
+          <div id="contactList" class="contact-list"></div>
+          <div class="contact-tools"><button id="setDefaultBtn" class="tool-button">☆ Set as default</button><button id="deleteContactBtn" class="tool-button danger">⌫ Remove</button></div>
+        </div>
+
+        <aside class="qr-panel">
+          <div class="qr-topline"><div><h2 id="qrHeading">WhatsApp QR</h2></div><span class="qr-live"><i></i> LIVE QR</span></div>
+          <p class="qr-hint">QR for <strong id="qrContactName">your contact</strong></p>
+          <div class="channel-switch" role="tablist" aria-label="QR destination">
+            <button class="channel-option active" data-channel="whatsapp" role="tab" aria-selected="true"><span class="wa-icon">◔</span> WhatsApp</button>
+            <button class="channel-option" data-channel="email" role="tab" aria-selected="false"><span class="mail-icon">✉</span> Email</button>
+          </div>
+          <div class="qr-frame"><div id="qrCode" aria-label="Generated contact QR code"></div><div id="qrEmpty" class="qr-empty" hidden>QR code unavailable</div></div>
+          <div class="qr-caption"><span class="qr-caption-mark">⌗</span><span>SCAN TO <strong id="qrCaption">WHATSAPP</strong></span></div>
+          <div class="detail-card">
+            <div class="detail-label" id="detailLabel">WHATSAPP NUMBER</div>
+            <div class="detail-value-row"><strong id="detailValue">—</strong><button id="copyBtn" class="copy-icon" aria-label="Copy contact link" title="Copy link">Copy</button></div>
+            <div class="detail-sub" id="detailSub">Used by this QR to open a direct chat</div>
+          </div>
+          <div class="qr-actions"><button id="downloadBtn" class="download-btn"><span>↓</span> Download PNG</button><button id="shareBtn" class="share-btn" aria-label="Share link" title="Share link">↗</button></div>
+          <p class="qr-footnote" id="qrInstruction">Scan this code to start a WhatsApp chat.</p>
+        </aside>
+      </section>
+
+      <section class="bottom-note"><div class="note-icon">◈</div><div><strong>Your contacts stay private</strong><p>Saved only in this browser. They do not sync to other devices.</p></div></section>
+    </main>
+    <footer><span>CONTACT QR <span class="footer-dot">•</span> SIMPLE SHARING</span><span>Works offline after your first visit</span></footer>
+  </div>
+
+  <dialog id="contactDialog">
+    <form id="contactForm" method="dialog">
+      <div class="dialog-top"><div><div class="eyebrow">CONTACT DETAILS</div><h2 id="dialogTitle">Add a contact</h2></div><button type="button" class="close-btn" id="closeDialog" aria-label="Close">×</button></div>
+      <label>Display name<input id="nameInput" name="name" required maxlength="40" placeholder="e.g. Priya Sharma"></label>
+      <label>WhatsApp number<input id="phoneInput" name="phone" required inputmode="tel" placeholder="+91 98765 43210"><small>Include country code. Spaces and punctuation are removed automatically.</small></label>
+      <label>Email address <span class="optional">OPTIONAL</span><input id="emailInput" name="email" type="email" placeholder="hello@example.com"></label>
+      <label class="default-check"><input id="defaultInput" type="checkbox"> Make this the default contact</label>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="cancel-btn" id="cancelDialog">Cancel</button><button class="save-btn" type="submit">Save contact <span>→</span></button></div>
+    </form>
+  </dialog>
+  <dialog id="settingsDialog">
+    <div class="dialog-top"><div><div class="eyebrow">PREFERENCES</div><h2>Settings</h2></div><button type="button" class="close-btn" data-close-settings aria-label="Close">×</button></div>
+    <div class="settings-content"><div class="setting-item"><strong>Install Contact QR</strong><p>On iPhone, tap Share in Safari then “Add to Home Screen”. On Android, use the install button in your browser.</p></div><div class="setting-item"><strong>Local data</strong><p>Your contacts are stored in this browser only. Clearing site data removes them.</p><button id="resetBtn" class="reset-btn">Reset all contacts</button></div></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="vendor/qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
