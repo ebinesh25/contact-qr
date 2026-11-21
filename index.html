@@ -33,7 +33,25 @@
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
     "browserRequirements": "Requires JavaScript and a modern web browser",
+    "author": {
+      "@type": "Person",
+      "name": "Ebinesh A",
+      "url": "https://www.ebinesh.in/"
+    },
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What happens when someone scans a WhatsApp QR?", "acceptedAnswer": { "@type": "Answer", "text": "It opens a WhatsApp chat with the selected contact's phone number." } },
+      { "@type": "Question", "name": "What happens when someone scans an email QR?", "acceptedAnswer": { "@type": "Answer", "text": "It opens a new email addressed to the selected contact's email address." } },
+      { "@type": "Question", "name": "Can I change who receives enquiries?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Select another contact or add and edit contacts. The on-screen QR updates immediately." } },
+      { "@type": "Question", "name": "Will a downloaded or printed QR change when I switch contacts?", "acceptedAnswer": { "@type": "Answer", "text": "No. A downloaded or printed QR keeps its original phone number or email address. Download and share a new QR after changing the contact." } },
+      { "@type": "Question", "name": "Where are my contacts saved?", "acceptedAnswer": { "@type": "Answer", "text": "Contacts are saved in this browser on this device and do not sync to other devices." } }
+    ]
   }
   </script>
   <link rel="stylesheet" href="styles.css">
@@ -77,8 +95,25 @@
           <p class="qr-footnote" id="qrInstruction" style="display: none;">Scan this code to start a WhatsApp chat.</p>
         </aside>
       </section>
+      <div class="qr-actions"><button id="downloadBtn" class="download-btn"><span>↓</span> Download PNG</button><button id="shareBtn" class="share-btn" aria-label="Share link" title="Share link">↗</button></div>
 
       <section class="bottom-note"><div class="note-icon">◈</div><div><strong>Your contacts stay private</strong><p>Saved only in this browser. They do not sync to other devices.</p></div></section>
+
+      <section class="seo-section faq-section" aria-labelledby="faqTitle">
+        <div class="seo-section-heading"><span class="eyebrow">QUICK ANSWERS</span><h2 id="faqTitle">Contact QR FAQs</h2></div>
+        <div class="faq-list">
+          <details><summary>What happens when someone scans a WhatsApp QR?</summary><p>It opens a WhatsApp chat with the selected contact’s phone number.</p></details>
+          <details><summary>What happens when someone scans an email QR?</summary><p>It opens a new email addressed to the selected contact’s email address.</p></details>
+          <details><summary>Can I change who receives enquiries?</summary><p>Yes. Select another contact or add and edit contacts. The on-screen QR updates immediately.</p></details>
+          <details><summary>Will a downloaded or printed QR change when I switch contacts?</summary><p>No. A downloaded or printed QR keeps its original phone number or email address. Download and share a new QR after changing the contact.</p></details>
+          <details><summary>Where are my contacts saved?</summary><p>Contacts are saved in this browser on this device and do not sync to other devices.</p></details>
+        </div>
+      </section>
+
+      <section class="seo-section creator-section" aria-labelledby="creatorTitle">
+        <div class="creator-mark">⌗</div>
+        <div><span class="eyebrow">ABOUT THE CREATOR</span><h2 id="creatorTitle">Made by Ebinesh A</h2><p>Contact QR is an independent tool by Ebinesh A, a software engineer who builds practical software and digital tools.</p><a href="https://www.ebinesh.in/" target="_blank" rel="noopener noreferrer">Explore more projects at ebinesh.in <span aria-hidden="true">↗</span></a></div>
+      </section>
     </main>
     <footer><span>CONTACT QR <span class="footer-dot">•</span> SIMPLE SHARING</span><span>Works offline after your first visit</span></footer>
   </div>
@@ -94,8 +129,6 @@
       <div class="dialog-actions"><button type="button" class="cancel-btn" id="cancelDialog">Cancel</button><button class="save-btn" type="submit">Save contact <span>→</span></button></div>
     </form>
   </dialog>
-  <div class="qr-actions"><button id="downloadBtn" class="download-btn"><span>↓</span> Download PNG</button><button id="shareBtn" class="share-btn" aria-label="Share link" title="Share link">↗</button></div>
-
   <dialog id="settingsDialog">
     <div class="dialog-top"><div><div class="eyebrow">PREFERENCES</div><h2>Settings</h2></div><button type="button" class="close-btn" data-close-settings aria-label="Close">×</button></div>
     <div class="settings-content"><div class="setting-item"><strong>Install Contact QR</strong><p>On iPhone, tap Share in Safari then “Add to Home Screen”. On Android, use the install button in your browser.</p></div><div class="setting-item"><strong>Local data</strong><p>Your contacts are stored in this browser only. Clearing site data removes them.</p><button id="resetBtn" class="reset-btn">Reset all contacts</button></div></div>

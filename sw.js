@@ -1,4 +1,4 @@
-const CACHE = 'contact-qr-shell-v17';
+const CACHE = 'contact-qr-shell-v18';
 const FILES = ['./', './index.html', './styles.css', './app.js', './manifest.json', './vendor/qrcode.min.js', './icons/icon.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
