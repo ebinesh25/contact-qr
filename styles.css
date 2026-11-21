@@ -656,6 +656,7 @@ footer {
 }
 
 dialog {
+  margin: 24px auto auto;
   padding: 0;
   border: 0;
   border-radius: 15px;
@@ -797,32 +798,43 @@ dialog label small {
 }
 
 .settings-content {
-  padding: 0 25px 23px
+  padding: 0 25px 25px
 }
 
 .setting-item {
   border-top: 1px solid var(--line);
-  padding: 15px 0
+  padding: 18px 0
 }
 
 .setting-item strong {
-  font-size: 12px
+  display: block;
+  font-size: 14px;
+  letter-spacing: -.2px
 }
 
 .setting-item p {
-  font-size: 11px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.55;
   color: #7e857c;
-  margin: 6px 0 0
+  margin: 8px 0 0
 }
 
 .reset-btn {
-  border: 0;
-  background: none;
+  border: 1px solid #f0d8d3;
+  background: #fff8f6;
   color: var(--red);
-  font: 600 11px var(--sans);
-  padding: 12px 0 0;
-  cursor: pointer
+  font: 600 12px var(--sans);
+  min-height: 42px;
+  margin-top: 14px;
+  padding: 0 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease
+}
+
+.reset-btn:hover {
+  background: #fff0ec;
+  border-color: #e8bfb7
 }
 
 .toast {
@@ -1512,7 +1524,42 @@ input:focus-visible {
     width: min(560px, calc(100vw - 24px));
     max-height: calc(100vh - 16px);
     max-height: calc(100dvh - 16px);
-    margin: auto 12px;
+    margin: 10px auto auto;
+  }
+
+  dialog {
+    margin: 10px auto auto;
+  }
+
+  #settingsDialog {
+    width: min(440px, calc(100vw - 24px));
+    border-radius: 18px;
+    overflow: hidden auto;
+  }
+
+  #settingsDialog > .dialog-top {
+    align-items: center;
+    margin: 0;
+    padding: 23px 22px 18px;
+    background: #f8faf5;
+    border-bottom: 1px solid var(--line);
+  }
+
+  #settingsDialog .dialog-top h2 {
+    font-size: 25px;
+    margin-top: 5px;
+  }
+
+  #settingsDialog .settings-content {
+    padding: 0 22px 12px;
+  }
+
+  #settingsDialog .setting-item {
+    padding: 18px 0;
+  }
+
+  #settingsDialog .setting-item:last-child {
+    padding-bottom: 20px;
   }
 
   #contactDialog form {
